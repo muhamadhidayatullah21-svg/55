@@ -1,0 +1,166 @@
+{
+  "settings": {
+    "appTitle": "Pemilihan Ketua & Wakil Ketua OSIS",
+    "schoolName": "SMK Lentera Bangsa 2",
+    "periode": "Masa Bakti 2026/2027",
+    "logoUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%20fill%3D%22none%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22g1%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2306b6d4%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%233b82f6%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%238b5cf6%22%20%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22flame%22%20x1%3D%220%25%22%20y1%3D%22100%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f59e0b%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23ef4444%22%20%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23fbbf24%22%20%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2246%22%20stroke%3D%22url(%23g1)%22%20stroke-width%3D%224%22%20fill%3D%22%230f172a%22%20%2F%3E%0A%20%20%3Cpath%20d%3D%22M50%2020%20C42%2032%2038%2042%2038%2052%20C38%2064%2045%2072%2050%2075%20C55%2072%2062%2064%2062%2052%20C62%2042%2058%2032%2050%2020%20Z%22%20fill%3D%22url(%23flame)%22%20opacity%3D%220.9%22%20%2F%3E%0A%20%20%3Cpath%20d%3D%22M50%2035%20C46%2044%2044%2050%2044%2056%20C44%2063%2048%2067%2050%2069%20C52%2067%2056%2063%2056%2056%20C56%2050%2054%2044%2050%2035%20Z%22%20fill%3D%22%23fef08a%22%20%2F%3E%0A%20%20%3Cpath%20d%3D%22M30%2076%20L70%2076%20L65%2082%20L35%2082%20Z%22%20fill%3D%22%2306b6d4%22%20%2F%3E%0A%20%20%3Ctext%20x%3D%2250%22%20y%3D%2292%22%20font-size%3D%227%22%20font-weight%3D%22900%22%20fill%3D%22%2338bdf8%22%20text-anchor%3D%22middle%22%20letter-spacing%3D%221%22%3ELB%202%20VOCATIONAL%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+    "votingStatus": "open",
+    "votingCloseTime": null,
+    "strictDpt": false,
+    "antiPeepModeDefault": false,
+    "enableLiveQuickCount": true
+  },
+  "adminPasswordHash": "hp_kneqn2_11",
+  "paslon": [
+    {
+      "id": "paslon-1",
+      "nomorUrut": 1,
+      "namaKetua": "Muhammad Fathir Pratama",
+      "namaWakil": "Alya Sabrina Putri",
+      "kelasKetua": "XI RPL 1",
+      "kelasWakil": "X DKV 2",
+      "foto": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      "tagline": "Kreatif, Kolaboratif, dan Berkarakter Teknologi",
+      "visi": "Mewujudkan OSIS SMK Lentera Bangsa 2 sebagai wadah aspirasi siswa yang adaptif, inovatif di era digital, berakhlak mulia, dan berdaya saing global.",
+      "misi": [
+        "Menyelenggarakan e-sport dan festival kreativitas digital antarkelas.",
+        "Membuka kanal aspirasi digital \"Curhat Santai OSIS\" yang transparan dan solutif.",
+        "Mengembangkan program inkubasi wirausaha kreatif berbasis projek kejuruan.",
+        "Mempererat keharmonisan dan solidaritas antarseluruh jurusan di SMK Lentera Bangsa 2."
+      ],
+      "programKerja": [
+        "LB2 Cyber Cup & Tech Expo tahunan.",
+        "Podcast Siswa: Lentera Suara Pelajar.",
+        "Gerakan Green School: Satu Siswa Satu Tanaman Hidroponik.",
+        "Sistem Informasi Kegiatan Siswa Berbasis QR Code."
+      ],
+      "color": "#06b6d4",
+      "voteCount": 0
+    },
+    {
+      "id": "paslon-2",
+      "nomorUrut": 2,
+      "namaKetua": "Bintang Aditya Nugraha",
+      "namaWakil": "Clarissa Maharani",
+      "kelasKetua": "XI TKJ 2",
+      "kelasWakil": "XI AKL 1",
+      "foto": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80",
+      "tagline": "Aksi Nyata, Solidaritas Kuat, Prestasi Tanpa Batas",
+      "visi": "Menjadikan OSIS SMK Lentera Bangsa 2 yang berintegritas tinggi, unggul dalam kepemimpinan, sigap bertindak, serta menjadi garda terdepan penegak kedisiplinan berkarakter positif.",
+      "misi": [
+        "Meningkatkan partisipasi aktif siswa dalam lomba kompetensi kejuruan (LKS) dan seni budaya.",
+        "Optimalisasi peran ekstrakurikuler dalam mengasah soft-skill kepemimpinan kerja.",
+        "Membangun budaya disiplin ramah melalui mentoring antarkelas (Kakak Asuh).",
+        "Menghidupkan kegiatan sosial kemasyarakatan dan kepedulian lingkungan sekitar sekolah."
+      ],
+      "programKerja": [
+        "Liga Futsal & Basket OSIS Cup antar-sekolah sekota.",
+        "Lentera Peduli: Baksos & Service Motor/Komputer Gratis bagi Warga.",
+        "Workshop Bootcamp Siap Kerja & Sertifikasi Industri.",
+        "Lentera Music & Cultural Fest 2026."
+      ],
+      "color": "#a855f7",
+      "voteCount": 0
+    },
+    {
+      "id": "paslon-3",
+      "nomorUrut": 3,
+      "namaKetua": "Rifky Ardiansyah",
+      "namaWakil": "Nadine Aurellia Zahra",
+      "kelasKetua": "XI TKR 1",
+      "kelasWakil": "X OTKP 1",
+      "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      "tagline": "Inspiratif, Tanggap Aspirasi, Bergerak Serempak",
+      "visi": "Membangun ekosistem sekolah yang inklusif, membangkitkan rasa bangga menjadi anak SMK yang siap kerja, santun budi pekerti, dan melek teknologi masa depan.",
+      "misi": [
+        "Menjamin transparansi anggaran kegiatan OSIS kepada seluruh perwakilan kelas (MPK).",
+        "Mengaktifkan kembali mading digital dan pojok literasi inspiratif di setiap koridor jurusan.",
+        "Menjalin kolaborasi dengan ikatan alumni untuk mentoring karier dan magang.",
+        "Menciptakan iklim sekolah yang bebas perundungan (anti-bullying) dengan konseling sebaya."
+      ],
+      "programKerja": [
+        "Hari Sehat & Bugar Bersama (Senam Gaul & Sarapan Bergizi).",
+        "Pojok Karier SMK: Sharing Session Praktisi Industri & Alumni.",
+        "Festival Kuliner & Produk Karya Siswa Tiap Akhir Semester.",
+        "Piala Bergilir Kebersihan & Kerapian Bengkel / Lab Tiap Bulan."
+      ],
+      "color": "#f59e0b",
+      "voteCount": 0
+    }
+  ],
+  "dpt": [
+    {
+      "id": "dpt-1",
+      "nama": "Ahmad Fauzi",
+      "kelas": "XII RPL 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-2",
+      "nama": "Siti Nurhaliza",
+      "kelas": "XII RPL 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-3",
+      "nama": "Dimas Wicaksono",
+      "kelas": "XII RPL 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-4",
+      "nama": "Putri Anggraini",
+      "kelas": "XI TKJ 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-5",
+      "nama": "Rian Hidayat",
+      "kelas": "XI TKJ 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-6",
+      "nama": "Dewi Lestari",
+      "kelas": "XI TKJ 2",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-7",
+      "nama": "Bagus Prasetyo",
+      "kelas": "X DKV 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-8",
+      "nama": "Zahra Ramadhani",
+      "kelas": "X DKV 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-9",
+      "nama": "Fajar Nugraha",
+      "kelas": "X TKR 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-10",
+      "nama": "Anisa Rahmawati",
+      "kelas": "XI AKL 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-11",
+      "nama": "Rizky Pratama",
+      "kelas": "XII OTKP 1",
+      "hasVoted": false
+    },
+    {
+      "id": "dpt-12",
+      "nama": "Nabila Syahrani",
+      "kelas": "X RPL 2",
+      "hasVoted": false
+    }
+  ],
+  "votes": []
+}
