@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { createServer as createHttpServer } from 'node:http';
 import path from 'path';
 import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
@@ -693,9 +694,13 @@ async function startServer() {
   });
 
   // --- VITE MIDDLEWARE & STATIC SERVING ---
+  const httpServer = createHttpServer(app);
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: { server: httpServer },
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);
@@ -707,7 +712,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`E-Voting SMK Lentera Bangsa 2 Server running at http://0.0.0.0:${PORT}`);
   });
 }

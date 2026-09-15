@@ -10,7 +10,7 @@
     "antiPeepModeDefault": false,
     "enableLiveQuickCount": true
   },
-  "adminPasswordHash": "hp_kneqn2_11",
+  "adminPasswordHash": "hp_wy6a_4",
   "paslon": [
     {
       "id": "paslon-1",
@@ -88,79 +88,6 @@
       "voteCount": 0
     }
   ],
-  "dpt": [
-    {
-      "id": "dpt-1",
-      "nama": "Ahmad Fauzi",
-      "kelas": "XII RPL 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-2",
-      "nama": "Siti Nurhaliza",
-      "kelas": "XII RPL 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-3",
-      "nama": "Dimas Wicaksono",
-      "kelas": "XII RPL 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-4",
-      "nama": "Putri Anggraini",
-      "kelas": "XI TKJ 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-5",
-      "nama": "Rian Hidayat",
-      "kelas": "XI TKJ 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-6",
-      "nama": "Dewi Lestari",
-      "kelas": "XI TKJ 2",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-7",
-      "nama": "Bagus Prasetyo",
-      "kelas": "X DKV 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-8",
-      "nama": "Zahra Ramadhani",
-      "kelas": "X DKV 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-9",
-      "nama": "Fajar Nugraha",
-      "kelas": "X TKR 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-10",
-      "nama": "Anisa Rahmawati",
-      "kelas": "XI AKL 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-11",
-      "nama": "Rizky Pratama",
-      "kelas": "XII OTKP 1",
-      "hasVoted": false
-    },
-    {
-      "id": "dpt-12",
-      "nama": "Nabila Syahrani",
-      "kelas": "X RPL 2",
-      "hasVoted": false
-    }
-  ],
+  "dpt": [],
   "votes": []
 }
