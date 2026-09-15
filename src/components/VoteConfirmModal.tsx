@@ -62,7 +62,7 @@ export const VoteConfirmModal: React.FC<VoteConfirmModalProps> = ({
           <div className="text-xs text-slate-400">
             Anda akan memberikan 1 suara sah atas nama:
             <div className="mt-1 font-mono font-bold text-sm text-cyan-300 bg-slate-900/90 py-1.5 px-3 rounded-lg border border-slate-800 inline-block">
-              {voterNama} &bull; {voterKelas}
+              {voterNama}
             </div>
           </div>
 

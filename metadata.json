@@ -2,5 +2,7 @@
   "name": "E-Voting SMK Lentera Bangsa 2",
   "description": "Aplikasi E-Voting Pemilihan Ketua & Wakil Ketua OSIS SMK Lentera Bangsa 2 dengan rekapitulasi suara real-time, manajemen DPT & paslon, serta akses multi-device tanpa ribet.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

@@ -2,21 +2,18 @@ import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   User, 
-  GraduationCap, 
   Vote, 
   CheckCircle2, 
   AlertCircle, 
   Eye, 
   EyeOff, 
   Sparkles, 
-  Check, 
   ChevronRight,
   ShieldCheck,
   Search,
   Clock
 } from 'lucide-react';
 import { Paslon, AppSettings, VoteReceipt } from '../types';
-import { DEFAULT_KELAS_LIST } from '../data/defaultData';
 import { api } from '../services/api';
 import { PaslonDetailModal } from './PaslonDetailModal';
 import { VoteConfirmModal } from './VoteConfirmModal';
@@ -44,7 +41,6 @@ export const VoterView: React.FC<VoterViewProps> = ({
 
   // Masking state for anti-peep
   const [maskNama, setMaskNama] = useState<boolean>(false);
-  const [maskKelas, setMaskKelas] = useState<boolean>(false);
 
   // Selected candidate and modals
   const [selectedPaslonDetail, setSelectedPaslonDetail] = useState<Paslon | null>(null);
@@ -54,19 +50,10 @@ export const VoterView: React.FC<VoterViewProps> = ({
   // Vote receipt state
   const [voteReceipt, setVoteReceipt] = useState<VoteReceipt | null>(null);
 
-  // Class selection search/filter
-  const [kelasSearch, setKelasSearch] = useState<string>('');
-  const [isClassDropdownOpen, setIsClassDropdownOpen] = useState<boolean>(false);
-
-  const filteredKelas = DEFAULT_KELAS_LIST.filter(k => 
-    k.toLowerCase().includes(kelasSearch.toLowerCase())
-  );
-
   // Sync antiPeepMode to input masking if toggled from navbar
   useEffect(() => {
     if (antiPeepMode) {
       setMaskNama(true);
-      setMaskKelas(true);
     }
   }, [antiPeepMode]);
 
@@ -75,33 +62,31 @@ export const VoterView: React.FC<VoterViewProps> = ({
     setIdentityError(null);
 
     const cleanNama = nama.trim();
-    const cleanKelas = kelas.trim();
 
     if (!cleanNama) {
       setIdentityError('Harap masukkan Nama Lengkap Anda.');
       return;
     }
-    if (!cleanKelas) {
-      setIdentityError('Harap pilih atau masukkan Kelas Anda.');
-      return;
-    }
 
     setIsCheckingVoter(true);
     try {
-      const res = await api.checkVoter(cleanNama, cleanKelas);
+      const res = await api.checkVoter(cleanNama);
       if (res.hasVoted) {
         setIdentityError(
-          `Identitas "${cleanNama}" (${cleanKelas}) sudah tercatat telah memilih sebelumnya! Kode bukti: ${res.receiptCode || '-'}`
+          `Identitas "${cleanNama}" sudah tercatat telah memilih sebelumnya! Kode bukti: ${res.receiptCode || '-'}`
         );
         setIsCheckingVoter(false);
         return;
       }
       if (settings.strictDpt && !res.registeredInDpt) {
         setIdentityError(
-          `Nama "${cleanNama}" dari kelas "${cleanKelas}" tidak terdaftar dalam DPT resmi. Hubungi Panitia OSIS.`
+          `Nama "${cleanNama}" tidak terdaftar dalam DPT resmi. Hubungi Panitia OSIS.`
         );
         setIsCheckingVoter(false);
         return;
+      }
+      if (res.kelas) {
+        setKelas(res.kelas);
       }
       setIsIdentityConfirmed(true);
     } catch (err: any) {
@@ -117,7 +102,7 @@ export const VoterView: React.FC<VoterViewProps> = ({
       return;
     }
     if (!isIdentityConfirmed) {
-      alert('Silakan verifikasi Nama & Kelas Anda terlebih dahulu pada formulir di atas.');
+      alert('Silakan verifikasi Nama Lengkap Anda terlebih dahulu pada formulir di atas.');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -216,10 +201,10 @@ export const VoterView: React.FC<VoterViewProps> = ({
               Langkah Pertama: Verifikasi Identitas Pemilih
             </div>
             <h3 className="text-lg font-black text-white mt-1">
-              {isIdentityConfirmed ? 'Identitas Pemilih Terverifikasi' : 'Masukkan Nama Lengkap & Kelas'}
+              {isIdentityConfirmed ? 'Identitas Pemilih Terverifikasi' : 'Masukkan Nama Lengkap Siswa'}
             </h3>
             <p className="text-xs text-slate-400">
-              Tanpa registrasi email atau kata sandi rumit. Cukup ketik nama dan kelas jurusanmu.
+              Tanpa registrasi email atau kata sandi rumit. Cukup ketik nama lengkapmu untuk mencoblos.
             </p>
           </div>
 
@@ -231,26 +216,14 @@ export const VoterView: React.FC<VoterViewProps> = ({
             <button
               type="button"
               onClick={() => setMaskNama(!maskNama)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1 transition ${
+              className={`px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-1.5 transition ${
                 maskNama 
                   ? 'bg-purple-600 text-white shadow-[0_0_10px_rgba(168,85,247,0.4)]' 
                   : 'bg-slate-800 text-slate-300 hover:text-white'
               }`}
             >
               {maskNama ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-              <span>Nama</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setMaskKelas(!maskKelas)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium flex items-center gap-1 transition ${
-                maskKelas 
-                  ? 'bg-purple-600 text-white shadow-[0_0_10px_rgba(168,85,247,0.4)]' 
-                  : 'bg-slate-800 text-slate-300 hover:text-white'
-              }`}
-            >
-              {maskKelas ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-              <span>Kelas</span>
+              <span>Sensor Nama</span>
             </button>
           </div>
         </div>
@@ -269,8 +242,8 @@ export const VoterView: React.FC<VoterViewProps> = ({
                 <h4 className="text-base font-black text-white">
                   {maskNama ? '••••••••••••••••' : nama}
                 </h4>
-                <p className="text-xs text-slate-300 font-mono">
-                  Kelas: {maskKelas ? '••••••••' : kelas}
+                <p className="text-xs text-emerald-400 font-medium">
+                  Hak suara aktif &bull; Siap memberikan suara
                 </p>
               </div>
             </div>
@@ -285,9 +258,8 @@ export const VoterView: React.FC<VoterViewProps> = ({
           </div>
         ) : (
           <form onSubmit={handleVerifyIdentity} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              {/* Input Nama Lengkap */}
+            <div>
+              {/* Input Nama Lengkap (Single clean field) */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
@@ -303,6 +275,7 @@ export const VoterView: React.FC<VoterViewProps> = ({
                     value={nama}
                     onChange={(e) => setNama(e.target.value)}
                     placeholder="Contoh: Muhammad Fathir Pratama"
+                    autoFocus
                     className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition"
                   />
                   {maskNama && (
@@ -316,71 +289,6 @@ export const VoterView: React.FC<VoterViewProps> = ({
                   )}
                 </div>
               </div>
-
-              {/* Input / Dropdown Kelas */}
-              <div className="relative">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5">
-                    <GraduationCap className="w-3.5 h-3.5 text-purple-400" /> Kelas & Jurusan
-                  </span>
-                  {maskKelas && (
-                    <span className="text-[10px] text-purple-400 font-normal">Disamarkan</span>
-                  )}
-                </label>
-                
-                <div className="relative">
-                  <input
-                    type={maskKelas ? 'password' : 'text'}
-                    value={kelas}
-                    onChange={(e) => {
-                      setKelas(e.target.value);
-                      setKelasSearch(e.target.value);
-                    }}
-                    onFocus={() => setIsClassDropdownOpen(true)}
-                    placeholder="Pilih atau ketik kelas (Contoh: XI RPL 1)"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setIsClassDropdownOpen(!isClassDropdownOpen)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs p-1"
-                  >
-                    ▼
-                  </button>
-                </div>
-
-                {/* Suggestions dropdown */}
-                {isClassDropdownOpen && (
-                  <div className="absolute z-20 top-full left-0 right-0 mt-1 max-h-48 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700 shadow-2xl p-1 text-xs">
-                    <div className="p-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-800">
-                      Pilih Kelas SMK Lentera Bangsa 2:
-                    </div>
-                    {filteredKelas.length > 0 ? (
-                      filteredKelas.map((k) => (
-                        <div
-                          key={k}
-                          onClick={() => {
-                            setKelas(k);
-                            setIsClassDropdownOpen(false);
-                          }}
-                          className="px-3 py-2 rounded-lg hover:bg-purple-950/60 hover:text-purple-300 cursor-pointer text-slate-300 flex items-center justify-between"
-                        >
-                          <span>{k}</span>
-                          {kelas === k && <Check className="w-3.5 h-3.5 text-purple-400" />}
-                        </div>
-                      ))
-                    ) : (
-                      <div 
-                        className="p-3 text-slate-400 cursor-pointer hover:bg-slate-800 rounded-lg"
-                        onClick={() => setIsClassDropdownOpen(false)}
-                      >
-                        Gunakan kelas manual: "{kelas}"
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-
             </div>
 
             {/* Error Message */}

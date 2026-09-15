@@ -316,24 +316,27 @@ async function startServer() {
   app.get('/api/check-voter', (req: Request, res: Response) => {
     const nama = String(req.query.nama || '').trim().toLowerCase();
     const kelas = String(req.query.kelas || '').trim().toLowerCase();
-    if (!nama || !kelas) {
-      return res.status(400).json({ error: 'Nama dan Kelas wajib diisi' });
+    if (!nama) {
+      return res.status(400).json({ error: 'Nama Lengkap wajib diisi' });
     }
 
-    // Check in recorded votes
-    const voted = db.votes.find(
-      (v) => v.nama.trim().toLowerCase() === nama && v.kelas.trim().toLowerCase() === kelas
-    );
+    // Check in DPT first to auto-resolve class if not provided
+    const dptItem = db.dpt.find((d) => {
+      const matchNama = d.nama.trim().toLowerCase() === nama;
+      return kelas ? (matchNama && d.kelas.trim().toLowerCase() === kelas) : matchNama;
+    });
 
-    // Check in DPT if strict
-    const dptItem = db.dpt.find(
-      (d) => d.nama.trim().toLowerCase() === nama && d.kelas.trim().toLowerCase() === kelas
-    );
+    // Check in recorded votes
+    const voted = db.votes.find((v) => {
+      const matchNama = v.nama.trim().toLowerCase() === nama;
+      return kelas ? (matchNama && v.kelas.trim().toLowerCase() === kelas) : matchNama;
+    });
 
     res.json({
       hasVoted: Boolean(voted || dptItem?.hasVoted),
       registeredInDpt: Boolean(dptItem),
       receiptCode: voted ? voted.receiptCode : dptItem?.receiptCode,
+      kelas: dptItem ? dptItem.kelas : (kelas || ''),
     });
   });
 
@@ -343,35 +346,43 @@ async function startServer() {
       return res.status(400).json({ error: 'Sesi pemilihan suara saat ini sedang DITUTUP oleh Panitia OSIS.' });
     }
 
-    const { nama, kelas, paslonId } = req.body;
-    if (!nama || !kelas || !paslonId) {
-      return res.status(400).json({ error: 'Nama, Kelas, dan Paslon pilihan wajib diisi lengkap.' });
+    const { nama, paslonId } = req.body;
+    let kelasInput = req.body.kelas;
+    if (!nama || !paslonId) {
+      return res.status(400).json({ error: 'Nama Lengkap dan Paslon pilihan wajib diisi.' });
     }
 
     const cleanNama = String(nama).trim();
-    const cleanKelas = String(kelas).trim();
     const normNama = cleanNama.toLowerCase();
+
+    // Auto-resolve class from DPT if not provided or hidden
+    let dptIndex = db.dpt.findIndex((d) => {
+      const matchNama = d.nama.trim().toLowerCase() === normNama;
+      return kelasInput ? (matchNama && d.kelas.trim().toLowerCase() === String(kelasInput).trim().toLowerCase()) : matchNama;
+    });
+
+    const cleanKelas = kelasInput 
+      ? String(kelasInput).trim() 
+      : (dptIndex !== -1 ? db.dpt[dptIndex].kelas : 'Siswa SMK LB2');
     const normKelas = cleanKelas.toLowerCase();
 
-    // Verify duplicate voting
-    const existingVote = db.votes.find(
-      (v) => v.nama.trim().toLowerCase() === normNama && v.kelas.trim().toLowerCase() === normKelas
-    );
+    // Verify duplicate voting by name (and class if specified)
+    const existingVote = db.votes.find((v) => {
+      const matchNama = v.nama.trim().toLowerCase() === normNama;
+      return kelasInput ? (matchNama && v.kelas.trim().toLowerCase() === normKelas) : matchNama;
+    });
+
     if (existingVote) {
       return res.status(409).json({
-        error: `Identitas "${cleanNama}" dari kelas "${cleanKelas}" telah terdaftar memberikan suara sebelumnya. Satu pemilih hanya dapat memilih 1 kali!`,
+        error: `Identitas "${cleanNama}" telah terdaftar memberikan suara sebelumnya. Satu pemilih hanya dapat memilih 1 kali!`,
         receiptCode: existingVote.receiptCode,
       });
     }
 
     // Check DPT if strict mode enabled
-    let dptIndex = db.dpt.findIndex(
-      (d) => d.nama.trim().toLowerCase() === normNama && d.kelas.trim().toLowerCase() === normKelas
-    );
-
     if (db.settings.strictDpt && dptIndex === -1) {
       return res.status(403).json({
-        error: `Nama "${cleanNama}" dari kelas "${cleanKelas}" belum terdaftar di DPT (Daftar Pemilih Tetap). Silakan hubungi Panitia OSIS.`,
+        error: `Nama "${cleanNama}" belum terdaftar di DPT (Daftar Pemilih Tetap). Silakan hubungi Panitia OSIS.`,
       });
     }
 

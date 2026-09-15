@@ -130,8 +130,11 @@ export const api = {
   },
 
   // Voter check & Cast vote
-  async checkVoter(nama: string, kelas: string): Promise<{ hasVoted: boolean; registeredInDpt: boolean; receiptCode?: string }> {
-    const res = await fetch(`${BASE_URL}/check-voter?nama=${encodeURIComponent(nama)}&kelas=${encodeURIComponent(kelas)}`);
+  async checkVoter(nama: string, kelas?: string): Promise<{ hasVoted: boolean; registeredInDpt: boolean; receiptCode?: string; kelas?: string }> {
+    const query = kelas 
+      ? `nama=${encodeURIComponent(nama)}&kelas=${encodeURIComponent(kelas)}`
+      : `nama=${encodeURIComponent(nama)}`;
+    const res = await fetch(`${BASE_URL}/check-voter?${query}`);
     if (!res.ok) {
       const err = await res.json();
       throw new Error(err.error || 'Gagal memeriksa status pemilih');
@@ -139,7 +142,7 @@ export const api = {
     return res.json();
   },
 
-  async castVote(nama: string, kelas: string, paslonId: string): Promise<{ success: boolean; message: string; receipt: VoteReceipt }> {
+  async castVote(nama: string, kelas: string | undefined, paslonId: string): Promise<{ success: boolean; message: string; receipt: VoteReceipt }> {
     const res = await fetch(`${BASE_URL}/vote`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -80,10 +80,10 @@ export const VoteReceiptView: React.FC<VoteReceiptViewProps> = ({
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">
-                Kelas / Jurusan
+                Status Hak Suara
               </span>
-              <span className="text-sm font-bold text-cyan-300 block mt-0.5">
-                {receipt.kelas}
+              <span className="text-xs font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-500/30 inline-block mt-0.5">
+                Sah & Terverifikasi
               </span>
             </div>
           </div>
